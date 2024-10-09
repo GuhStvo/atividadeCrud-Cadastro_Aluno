@@ -31,8 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     $selectMatricula = $conexao->prepare("SELECT * FROM alunos WHERE matricula = :matricula");
-    $selectMatricula->bindParam('matricula', $matricula);
-    $selectMatricula->execute();
+    $selectMatricula->execute($dados);
     if ($selectMatricula->rowCount()) {
         $erro .= "Matricula já cadastrada!<br>";
     }
@@ -45,5 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         header('location: index.php?msg=Não foi possivel cadastrar aluno!');
     }
-
 }

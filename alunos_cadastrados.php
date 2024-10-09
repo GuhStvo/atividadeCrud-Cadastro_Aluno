@@ -26,33 +26,29 @@
                 </tr>
             </thead>
             <?php 
-            $selectAlunos = $conexao->prepare("SELECT * FROM alunos INNER JOIN escolas INNER JOIN series ON alunos.id_escola=escolas.id_escola AND alunos.id_serie.=serie.id_serie");
-            $selectAlunos->execute();
-            while($array = $selectAlunos->fetch(PDO::FETCH_ASSOC)){
+            $selectAlunos = "SELECT * FROM alunos INNER JOIN escolas INNER JOIN series ON alunos.id_escola=escolas.id_escola AND alunos.id_serie=series.id_serie";
+            $preparando = $conexao->prepare($selectAlunos);
+            $preparando->execute();
+            while($array = $preparando->fetch(PDO::FETCH_ASSOC)){
                 $nome_aluno = $array['nome_aluno'];
-            }
-
-
+                $cpf_aluno = $array['cpf_aluno'];
+                $matricula = $array['matricula'];
+                $nome_responsavel = $array['nome_responsavel'];
+                $cpf_responsavel = $array['cpf_responsavel'];
+                $contato_responsavel = $array['contato_responsavel'];
+                $id_escola = $array['id_escola'];
+                $id_serie = $array['id_serie'];
             ?>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
             </tbody>
+            <?php
+            }
+            ?>
         </table>
     </div>
 
